@@ -1,0 +1,207 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\Hi> mongo 
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("272b125f-9082-4f11-8bc0-1a8519aef43c") }
+MongoDB server version: 5.0.6
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2022-03-17T19:12:32.974+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+Assignment                   0.000GB
+Sprint-2_day2_Advance_mongo  0.000GB
+Unit-4                       0.000GB
+Web-15                       0.000GB
+admin                        0.000GB
+code-step-by-step            0.000GB
+config                       0.000GB
+local                        0.000GB
+> use Assignment
+switched to db Assignment
+> show collections
+users
+> db
+Assignment
+> db.users.insert({"name":"Anwar"},{"age":25})
+WriteResult({ "nInserted" : 1 })
+> db.users.find({})
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar" }
+> db.users.insertMany([{"name":"Aysuh Batra"},{"name":"Suman"},{"name":"Dharampal"},{"name":"Surajit"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62497c4e48970c1fbb679307"),
+                ObjectId("62497c4e48970c1fbb679308"),
+                ObjectId("62497c4e48970c1fbb679309"),
+                ObjectId("62497c4e48970c1fbb67930a")
+        ]
+}
+> db.users.find({}).pretty()
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar" }      
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman" }      
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal" }  
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit" }    
+> db.users.insertMany([{"name":"ranjith"},{"name":"akshay"}]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62497cd548970c1fbb67930b"),
+                ObjectId("62497cd548970c1fbb67930c")
+        ]
+}
+> db.users.find({}).pretty()
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal" }
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930b"), "name" : "ranjith" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930c"), "name" : "akshay" }
+> db.users.update({"name":"Anwar"},{$set:{"age":25})
+... ^C
+
+> db
+Assignment
+> db.users.update({"name":"Anwar"},{$set:{"age":25}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find({})
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar", "age" : 25 }
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal" }
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930b"), "name" : "ranjith" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930c"), "name" : "akshay" }
+> db.users.update({"name":"Ayush Batra"},{$set:{"age":24}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.users.update({"name":"Dharampal"},{$set:{"age":25}})  
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find({})
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar", "age" : 25 }
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal", "age" : 25 }
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930b"), "name" : "ranjith" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930c"), "name" : "akshay" }
+> db.users.update({"name":"Ayush Batra"},{$set:{"age":24}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.users.update({"name":"Aysuh Batra"},{$set:{"age":24}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find({})
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar", "age" : 25 }
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra", "age" : 24 }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal", "age" : 25 }
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930b"), "name" : "ranjith" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930c"), "name" : "akshay" }
+> db.users.updateMany({"age":25},{$set:{"position":"Seniors"}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+> db.users.find({})
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar", "age" : 25, "position" : "Seniors" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra", "age" : 24 }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal", "age" : 25, "position" : "Seniors" }
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930b"), "name" : "ranjith" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930c"), "name" : "akshay" }
+> db.users.updateMany({},{$set:{"Team_name":"Avengers"}});     
+{ "acknowledged" : true, "matchedCount" : 7, "modifiedCount" : 7 }
+> db.users.find({})
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar", "age" : 25, "position" : "Seniors", "Team_name" : "Avengers" 
+}
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra", "age" : 24, "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal", "age" : 25, "position" : "Seniors", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930b"), "name" : "ranjith", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930c"), "name" : "akshay", "Team_name" : "Avengers" }
+> db.users.remove({"name":"akshay"})
+WriteResult({ "nRemoved" : 1 })
+> db.users.find({})
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar", "age" : 25, "position" : "Seniors", "Team_name" : "Avengers" 
+}
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra", "age" : 24, "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal", "age" : 25, "position" : "Seniors", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497cd548970c1fbb67930b"), "name" : "ranjith", "Team_name" : "Avengers" }
+> db.users.deleteOne({"_id" : ObjectId("62497cd548970c1fbb67930b")})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.users.find({})
+{ "_id" : ObjectId("62497aad48970c1fbb679306"), "name" : "Anwar", "age" : 25, "position" : "Seniors", "Team_name" : "Avengers" 
+}
+{ "_id" : ObjectId("62497c4e48970c1fbb679307"), "name" : "Aysuh Batra", "age" : 24, "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679308"), "name" : "Suman", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb679309"), "name" : "Dharampal", "age" : 25, "position" : "Seniors", "Team_name" : "Avengers" }
+{ "_id" : ObjectId("62497c4e48970c1fbb67930a"), "name" : "Surajit", "Team_name" : "Avengers" }
+> db.users.deleteMany({"age":25})                                   
+{ "acknowledged" : true, "deletedCount" : 2 }
+> db.users.find({}).pretty()
+{
+        "_id" : ObjectId("62497c4e48970c1fbb679307"),
+        "name" : "Aysuh Batra",
+        "age" : 24,
+        "Team_name" : "Avengers"
+}
+{
+        "_id" : ObjectId("62497c4e48970c1fbb679308"),
+        "name" : "Suman",
+        "Team_name" : "Avengers"
+}
+{
+        "_id" : ObjectId("62497c4e48970c1fbb67930a"),
+        "name" : "Surajit",
+        "Team_name" : "Avengers"
+}
+> db 
+Assignment
+> show dbs
+Assignment                   0.000GB
+Sprint-2_day2_Advance_mongo  0.000GB
+Unit-4                       0.000GB
+Web-15                       0.000GB
+admin                        0.000GB
+code-step-by-step            0.000GB
+config                       0.000GB
+local                        0.000GB
+> use Assignment
+switched to db Assignment
+> db
+Assignment
+> db.dropDatabase()
+{ "ok" : 1 }
+> show dbs
+Sprint-2_day2_Advance_mongo  0.000GB
+Unit-4                       0.000GB
+Web-15                       0.000GB
+admin                        0.000GB
+code-step-by-step            0.000GB
+config                       0.000GB
+local                        0.000GB
+>
